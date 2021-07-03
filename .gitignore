@@ -1,0 +1,7 @@
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.lock.hcl
+*.json
+*.js
+*.c9
