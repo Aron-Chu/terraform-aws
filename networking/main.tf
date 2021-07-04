@@ -44,7 +44,7 @@ resource "aws_route_table_association" "aron_public_assoc" {
 }
 
 resource "aws_subnet" "aron_private_subnet" {
-  count             = var.priavte_sn_count
+  count             = var.private_sn_count
   vpc_id            = aws_vpc.aron_vpc.id
   cidr_block        = var.private_cidrs[count.index]
   availability_zone = random_shuffle.az_list.result[count.index]
@@ -99,5 +99,14 @@ resource "aws_security_group" "aron_sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_db_subnet_group" "aron_rds_subnetgroup" {
+  count = var.db_subnet_group == true ? 1 : 0
+  name = "aron-rds-subnetgroup"
+  subnet_ids = aws_subnet.aron_private_subnet.*.id
+  tags = {
+    Name = "aron_rds_sng"
   }
 }
