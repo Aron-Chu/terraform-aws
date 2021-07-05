@@ -49,4 +49,6 @@ module "compute" {
   vol_size = 10
   public_sg = module.networking.public_sg
   public_subnets = module.networking.public_subnets
+  key_name = "aronkey"
+  public_key_path = "/home/ubuntu/.ssh/id_rsa.pub"
 }

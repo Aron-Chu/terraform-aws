@@ -7,12 +7,20 @@ data "aws_ami" "server_ami" {
     filter {
         name = "name"
         values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
+        keepers = {
+            key_name = var.key_name
+        }
     }
 }
 
 resource "random_id" "aron_node_id" {
     byte_length = 2
     count = var.instance_count
+}
+
+resource "aws_key_pair" "aron_auth" {
+    key_name = var.key_name
+    public_key = file(var.public_key_path)
 }
 
 resource "aws_instance" "aron_node" {
@@ -24,7 +32,7 @@ resource "aws_instance" "aron_node" {
     }
 
 
-# key_name = ""
+key_name = aws_key_pair.aron_auth.id
 vpc_security_group_ids = [var.public_sg]
 subnet_id = var.public_subnets[count.index]
 # user_data = ""

@@ -5,3 +5,5 @@ variable "instance_type" {}
 variable "vol_size" {}
 variable "public_sg" {}
 variable "public_subnets" {}
+variable "key_name" {}
+variable "public_key_path" {}
