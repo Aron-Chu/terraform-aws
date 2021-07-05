@@ -11,3 +11,11 @@ output "db_subnet_group_name" {
 output "db_security_group" {
   value = [aws_security_group.aron_sg["rds"].id]
 }
+
+output "public_subnets" {
+  value =aws_subnet.aron_public_subnet.*.id
+}
+
+output "public_sg" {
+  value = aws_security_group.aron_sg["public"].id
+}
