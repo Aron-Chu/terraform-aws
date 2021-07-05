@@ -103,8 +103,8 @@ resource "aws_security_group" "aron_sg" {
 }
 
 resource "aws_db_subnet_group" "aron_rds_subnetgroup" {
-  count = var.db_subnet_group == true ? 1 : 0
-  name = "aron-rds-subnetgroup"
+  count      = var.db_subnet_group == true ? 1 : 0
+  name       = "aron-rds-subnetgroup"
   subnet_ids = aws_subnet.aron_private_subnet.*.id
   tags = {
     Name = "aron_rds_sng"
