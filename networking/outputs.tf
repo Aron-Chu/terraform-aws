@@ -13,7 +13,7 @@ output "db_security_group" {
 }
 
 output "public_subnets" {
-  value =aws_subnet.aron_public_subnet.*.id
+  value = aws_subnet.aron_public_subnet.*.id
 }
 
 output "public_sg" {

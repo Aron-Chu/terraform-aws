@@ -9,17 +9,17 @@ variable "access_ip" {
 
 # --- database variables ---
 
-variable "dbname"  {
-  type = string
+variable "dbname" {
+  type      = string
   sensitive = true
 }
 
-variable "dbuser"  {
-  type = string
+variable "dbuser" {
+  type      = string
   sensitive = true
 }
 
-variable "dbpassword"  {
-  type = string
+variable "dbpassword" {
+  type      = string
   sensitive = true
 }
