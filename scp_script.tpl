@@ -1,4 +1,3 @@
-sleep 60 && 
 scp -i ~/.ssh/id_rsa \
 -o StrictHostKeyChecking=no \
 -o UserKnownHostsFile=/dev/null \

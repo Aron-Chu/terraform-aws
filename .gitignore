@@ -6,3 +6,4 @@
 *.js
 *.c9
 *kubectl
+*.sha256

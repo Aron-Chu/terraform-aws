@@ -47,15 +47,29 @@ resource "aws_instance" "aron_node" {
   root_block_device {
     volume_size = var.vol_size # 10
   }
-  provisioner "local-exec" {
-      command = templatefile("${path.cwd}/scp_script.tpl",
-      {
-          nodeip = self.public_ip
-          k3s_path = "${path.cwd}/../"
-          nodename = self.tags.Name
-      }
-      )
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      host        = self.public_ip
+      private_key = file(var.private_key_path)
+    }
+    script = "${path.cwd}/delay.sh"
   }
+  provisioner "local-exec" {
+    command = templatefile("${path.cwd}/scp_script.tpl",
+      {
+        nodeip   = self.public_ip
+        k3s_path = "${path.cwd}/../"
+        nodename = self.tags.Name
+      }
+    )
+  }
+    provisioner "local-exec" {
+    when = destroy 
+    command = "rm -f ${path.cwd}/../k3s-${self.tags.Name}"
+  }
+
 }
 
 resource "aws_lb_target_group_attachment" "aron_tg_attach" {
