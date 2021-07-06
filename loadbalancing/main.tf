@@ -13,11 +13,11 @@ resource "aws_lb_target_group" "aron_tg" {
   protocol = var.tg_protocol
   vpc_id   = var.vpc_id
   lifecycle {
-    ignore_changes = [name]
+    ignore_changes        = [name]
     create_before_destroy = true
   }
   health_check {
-    healthy_threshold    = var.lb_healthy_threshold
+    healthy_threshold   = var.lb_healthy_threshold
     unhealthy_threshold = var.lb_unhealthy_threshold
     timeout             = var.lb_timeout
     interval            = var.lb_interval
@@ -25,11 +25,11 @@ resource "aws_lb_target_group" "aron_tg" {
 }
 
 resource "aws_lb_listener" "mtc_lb_listener" {
-    load_balancer_arn = aws_lb.aron_lb.arn
-    port = var.listener_port
-    protocol = var.listener_protocol
-    default_action {
-        type = "forward"
-        target_group_arn = aws_lb_target_group.aron_tg.arn
-    }
+  load_balancer_arn = aws_lb.aron_lb.arn
+  port              = var.listener_port
+  protocol          = var.listener_protocol
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.aron_tg.arn
+  }
 }
