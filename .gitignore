@@ -5,3 +5,4 @@
 *.json
 *.js
 *.c9
+*kubectl

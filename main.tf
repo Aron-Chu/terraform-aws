@@ -31,7 +31,7 @@ module "loadbalancing" {
   source                 = "./loadbalancing"
   public_sg              = module.networking.public_sg
   public_subnets         = module.networking.public_subnets
-  tg_port                = 80
+  tg_port                = 8000
   tg_protocol            = "HTTP"
   vpc_id                 = module.networking.vpc_id
   lb_healthy_threshold   = 2
@@ -44,9 +44,9 @@ module "loadbalancing" {
 
 module "compute" {
   source              = "./compute"
-  instance_count      = 2
+  instance_count      = 1
   instance_type       = "t3.micro"
-  vol_size            = 10
+  vol_size            = 20
   public_sg           = module.networking.public_sg
   public_subnets      = module.networking.public_subnets
   key_name            = "aronkey"

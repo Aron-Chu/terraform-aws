@@ -5,5 +5,5 @@ output "lb_target_group_arn" {
 }
 
 output "lb_endpoint" {
-    value = aws_lb.aron_lb.dns_name
+  value = aws_lb.aron_lb.dns_name
 }
